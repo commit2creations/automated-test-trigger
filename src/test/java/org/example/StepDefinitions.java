@@ -4,12 +4,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.example.enums.Arithmetic;
 import org.example.pages.Calculator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -21,7 +19,7 @@ public class StepDefinitions {
     @Given("that we are on the calculator page")
     public void openCalculatorPage() {
         System.setProperty("webdriver.edge.driver", "[Enter Driver Location]");
-        System.setProperty("webdriver.chrome.driver", "[Enter Driver Location]");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\mrpro\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://classcalc.com/scientific-calculaor");
@@ -29,17 +27,17 @@ public class StepDefinitions {
         calculator = new Calculator(driver);
     }
 
-    @When("I {string} {int} and {int} together")
-    public int arithmeticFunctions(String arithmetic, int first, int second) {
+    @When("I {arithmetic} {int} and {int} together")
+    public int arithmeticFunctions(Arithmetic function, int first, int second) {
         calculator.clickNumber(first);
-        driver.findElement(new By.ById("button-" + arithmetic)).click();
+        calculator.operateArithmetic(function.getFunction());
         calculator.clickNumber(second);
         return first + second;
     }
 
-    @Then("I should see {int} as the result")
-    public void verifyResult(int first) {
+    @Then("I should see {word} as the result")
+    public void verifyResult(String first) {
         assertThat(calculator.getAnswer())
-                .isEqualTo("2");
+                .isEqualTo(first);
     }
 }

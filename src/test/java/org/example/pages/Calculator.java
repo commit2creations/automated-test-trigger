@@ -1,16 +1,11 @@
 package org.example.pages;
 
+import org.example.enums.Arithmetic;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.MalformedParametersException;
-import java.time.Duration;
 
 public class Calculator {
     final WebDriver driver;
@@ -26,8 +21,16 @@ public class Calculator {
         return driver.findElement(new By.ById("button-" + number));
     }
 
+    WebElement arithmeticButtons(String function) {
+        return driver.findElement(new By.ById(function));
+    }
+
     public void clickNumber(int number) {
         numberButtons(number).click();
+    }
+
+    public void operateArithmetic(String function) {
+        arithmeticButtons(function).click();
     }
 
     public String getAnswer() {
@@ -38,6 +41,8 @@ public class Calculator {
         }
         return driver.findElement(new By.ByCssSelector("#guppy-text-render-9 > span > span.katex-mathml > math > semantics > annotation")).getAttribute("innerHTML").trim();
     }
+
+
 
 
 }
