@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import org.example.enums.Arithmetic;
+import org.example.enums.MathBranch;
 import org.example.enums.ModalShould;
 import org.example.pages.ScientificCalculator;
 import org.openqa.selenium.*;
@@ -57,5 +58,16 @@ public class StepDefinitions {
     public void checkForExclamation(ModalShould auxiliary) {
         assertThat(scientificCalculator.isExclamation())
                 .isEqualTo(auxiliary.getModal());
+    }
+
+    @When("I select the {mathBranch} menu")
+    public void mathBranchMenu(MathBranch mathBranch){
+        scientificCalculator.openMathBranchMenu(mathBranch);
+    }
+
+    @Then("I {modalShould} see {mathBranch}")
+    public void mathBranchMenuWindow(ModalShould modalShould,MathBranch mathBranch){
+        assertThat(scientificCalculator.isMathBranchMenuOpen(mathBranch))
+                .isEqualTo(modalShould.getModal());
     }
 }

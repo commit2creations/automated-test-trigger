@@ -30,7 +30,7 @@ Feature: The calculator is working fine
     Examples:
       | branch       |
       | calculus     |
-      | algegra      |
+      | algebra      |
       | statistics   |
       | trigonometry |
 
@@ -42,4 +42,4 @@ Feature: The calculator is working fine
 
   Scenario: Selecting a form that the answer can't be converted to shows an exclamation point
 
-  Scenario: Selecting a form on an answer that is saved in the row changes the answer format
+    Scenario: Selecting a form on an answer that is saved in the row changes the answer format
